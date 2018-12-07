@@ -1,0 +1,10 @@
+name: CTAVote
+version: ${project.version}
+main: tacticalaxis.ctavote.Main
+api-version: 1.13
+prefix: CV
+authors: [TacticalAxis]
+description: Basic CTAVote Plugin
+commands:
+  ctavote:
+    description: CTA vote command

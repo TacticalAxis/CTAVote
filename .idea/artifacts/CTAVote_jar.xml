@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CTAVote:jar">
+    <output-path>$PROJECT_DIR$/../../../../../../../Desktop/Minecraft-TestServer/plugins</output-path>
+    <root id="archive" name="CTAVote.jar">
+      <element id="module-output" name="CTAVote" />
+    </root>
+  </artifact>
+</component>
