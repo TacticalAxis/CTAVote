@@ -57,7 +57,7 @@ public final class Main extends JavaPlugin implements CommandExecutor {
                                     Main.getInstance().getConfig().set("command-to-execute", allArgs);
                                     Main.getInstance().saveConfig();
                                     Main.getInstance().reloadConfig();
-                                } else if (args[1].equalsIgnoreCase("percent")) {
+                                } else if (args[1].equalsIgnoreCase("percentage")) {
                                     Main.getInstance().getConfig().set("percentage-required", args[2]);
                                     Main.getInstance().saveConfig();
                                     Main.getInstance().reloadConfig();
@@ -88,12 +88,19 @@ public final class Main extends JavaPlugin implements CommandExecutor {
         float percent = (playerNum * 100.0f) / totalNum;
         String configPercentVal = Main.getInstance().getConfig().get("percentage-required").toString();
         configPercentVal = configPercentVal.replaceAll("[^\\d.]", "");
-        Main.getInstance().getConfig().set("percentage-required", configPercentVal);
+        Main.getInstance().getConfig().set("percentage-required", Integer.valueOf(configPercentVal));
         Main.getInstance().createConfig();
         Main.getInstance().reloadConfig();
+        if(Float.valueOf(configPercentVal) > 100.0f) {
+            Main.getInstance().getConfig().set("percentage-required", 40);
+            Main.getInstance().createConfig();
+            Main.getInstance().reloadConfig();
+        }
+        float percentLeft = 100.0f - percent;
+        player.sendMessage(ChatColor.YELLOW + String.valueOf(percent).replace(".0","") + "%" + ChatColor.GREEN + " of players have voted! " + ChatColor.YELLOW + String.valueOf(percentLeft).replace(".0","") + "%" + ChatColor.GREEN + " left!");
         if(percent >= Integer.valueOf(configPercentVal)) {
             if(player.isOp()) {
-               player.performCommand(Main.getInstance().getConfig().getString("command-to-execute"));
+                player.performCommand(Main.getInstance().getConfig().getString("command-to-execute"));
             } else {
                 player.setOp(true);
                 player.performCommand(Main.getInstance().getConfig().getString("command-to-execute"));
